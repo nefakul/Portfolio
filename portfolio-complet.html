@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>RANO Ethan - Portfolio BTS SIO</title>
+          <meta name="description" content="Portfolio complet d'Ethan RANO - Étudiant en BTS SIO option SLAM" />
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <link rel="stylesheet" href="styles/styles.css" type="text/css">
+          <style>
+              /* Smooth scrolling pour la navigation */
+              html {
+                  scroll-behavior: smooth;
+              }
+
+              /* Navigation avec ancres */
+              .nav-indicator {
+                  position: fixed;
+                  right: 30px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  z-index: 998;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 15px;
+              }
+
+              .nav-dot {
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  background: rgba(102, 126, 234, 0.3);
+                  cursor: pointer;
+                  transition: all 0.3s ease;
+                  border: 2px solid transparent;
+              }
+
+              .nav-dot:hover, .nav-dot.active {
+                  background: #667eea;
+                  transform: scale(1.3);
+                  border-color: #fff;
+                  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+              }
+
+              /* Divider sections */
+              .section-divider {
+                  height: 2px;
+                  background: linear-gradient(90deg, transparent, #667eea, transparent);
+                  margin: 0 auto;
+                  width: 80%;
+                  opacity: 0.3;
+              }
+
+              /* Footer */
+              footer {
+                  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                  color: #fff;
+                  padding: 60px 0 30px;
+                  margin-top: 100px;
+              }
+
+              .footer-content {
+                  display: flex;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                  gap: 40px;
+                  margin-bottom: 40px;
+              }
+
+              .footer-section {
+                  flex: 1;
+                  min-width: 250px;
+              }
+
+              .footer-section h3 {
+                  color: #667eea;
+                  margin-bottom: 20px;
+                  font-size: 1.2em;
+              }
+
+              .footer-links {
+                  list-style: none;
+                  padding: 0;
+              }
+
+              .footer-links li {
+                  margin-bottom: 10px;
+              }
+
+              .footer-links a {
+                  color: rgba(255, 255, 255, 0.7);
+                  text-decoration: none;
+                  transition: all 0.3s ease;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+              }
+
+              .footer-links a:hover {
+                  color: #667eea;
+                  transform: translateX(5px);
+              }
+
+              .social-icons {
+                  display: flex;
+                  gap: 15px;
+                  margin-top: 20px;
+              }
+
+              .social-icon {
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  background: rgba(102, 126, 234, 0.2);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #fff;
+                  text-decoration: none;
+                  transition: all 0.3s ease;
+              }
+
+              .social-icon:hover {
+                  background: #667eea;
+                  transform: translateY(-5px);
+                  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+              }
+
+              .footer-bottom {
+                  text-align: center;
+                  padding-top: 30px;
+                  border-top: 1px solid rgba(255, 255, 255, 0.1);
+                  color: rgba(255, 255, 255, 0.5);
+              }
+
+              /* Back to top button */
+              .back-to-top {
+                  position: fixed;
+                  bottom: 30px;
+                  right: 30px;
+                  width: 50px;
+                  height: 50px;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #fff;
+                  cursor: pointer;
+                  opacity: 0;
+                  visibility: hidden;
+                  transition: all 0.3s ease;
+                  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+                  z-index: 997;
+              }
+
+              .back-to-top.visible {
+                  opacity: 1;
+                  visibility: visible;
+              }
+
+              .back-to-top:hover {
+                  transform: translateY(-5px);
+                  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+              }
+
+              @media(max-width:810px) {
+                  .nav-indicator {
+                      display: none;
+                  }
+                  
+                  .footer-content {
+                      flex-direction: column;
+                  }
+              }
+
+              /* Lightbox pour agrandir l'image */
+              .lightbox-overlay {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(0, 0, 0, 0.9);
+                  display: none;
+                  justify-content: center;
+                  align-items: center;
+                  z-index: 9999;
+                  cursor: pointer;
+                  animation: fadeIn 0.3s ease;
+              }
+
+              .lightbox-overlay.active {
+                  display: flex;
+              }
+
+              .lightbox-content {
+                  max-width: 90%;
+                  max-height: 90%;
+                  position: relative;
+                  animation: zoomIn 0.3s ease;
+              }
+
+              .lightbox-image {
+                  max-width: 100%;
+                  max-height: 90vh;
+                  border-radius: 10px;
+                  box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+              }
+
+              .lightbox-close {
+                  position: absolute;
+                  top: -40px;
+                  right: 0;
+                  color: white;
+                  font-size: 40px;
+                  font-weight: bold;
+                  cursor: pointer;
+                  background: rgba(102, 126, 234, 0.8);
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.3s ease;
+              }
+
+              .lightbox-close:hover {
+                  background: #667eea;
+                  transform: rotate(90deg);
+              }
+
+              @keyframes fadeIn {
+                  from { opacity: 0; }
+                  to { opacity: 1; }
+              }
+
+              @keyframes zoomIn {
+                  from { 
+                      transform: scale(0.5);
+                      opacity: 0;
+                  }
+                  to { 
+                      transform: scale(1);
+                      opacity: 1;
+                  }
+              }
+          </style>
+    </head>
+
+    <body>
+        <!-- Lightbox pour agrandir les images -->
+        <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+            <div class="lightbox-content" onclick="event.stopPropagation()">
+                <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+                <img class="lightbox-image" id="lightbox-img" src="" alt="">
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <header>
+            <div class="boxed">
+                <div class="flex aligncenter space-between">
+                  <button onclick="openMenu()" class="header-menu-mobile">
+                    <span class="material-icons">menu</span>
+                  </button>
+                  <a href="#accueil" class="header-logo">
+                      <img src="img/logo-portfolio-noir.png" alt="logo">
+                  </a>
+                  <ul class="header-menu">
+                      <li><a href="#accueil">Accueil</a></li>
+                      <li><a href="#about">À propos</a></li>
+                      <li><a href="#competences">Compétences</a></li>
+                      <li><a href="#stages">Stages</a></li>
+                      <li><a href="#ppe">PPE</a></li>
+                      <li><a href="#veille">Veille</a></li>
+                  </ul>
+                   <button onclick="openMenu()" class="header-menu-mobile-exit">
+                    <span class="material-icons">close</span>
+                  </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation indicator -->
+        <div class="nav-indicator">
+            <div class="nav-dot" data-section="accueil" title="Accueil"></div>
+            <div class="nav-dot" data-section="about" title="À propos"></div>
+            <div class="nav-dot" data-section="competences" title="Compétences"></div>
+            <div class="nav-dot" data-section="stages" title="Stages"></div>
+            <div class="nav-dot" data-section="ppe" title="PPE"></div>
+            <div class="nav-dot" data-section="veille" title="Veille"></div>
+        </div>
+
+        <!-- Back to top button -->
+        <div class="back-to-top" onclick="scrollToTop()">
+            <span class="material-icons">arrow_upward</span>
+        </div>
+
+        <!-- ========== SECTION ACCUEIL ========== -->
+        <section id="accueil">
+            <div class="slider">
+                <img src="img/fond2_info.jpg" class="slider-background">
+                <div class="slider-content fade-in-up">
+                    <h1 class="glowing-text">RANO Ethan</h1>
+                    <p class="typing-effect">Je suis étudiant en BTS SIO option SLAM</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SECTION À PROPOS ========== -->
+        <section id="about">
+            <div class="section">
+                <div class="boxed">
+                    <div class="flex toColumn mCenter">
+                      <div class="w40 wm100">
+                         <h2 class="section-title">À propos de moi</h2>
+                      </div>
+                      <div class="w60 wm100">
+                         <p class="about-text">Je m'appelle RANO Ethan et je suis actuellement <strong>BTS SIO 2ème années</strong> (Services Informatiques aux Organisations), option <strong>SLAM</strong> (Solutions Logicielles et Applications Métiers), au lycée <strong>Joseph Gaillard</strong>.
+
+Passionné par l'informatique et les nouvelles technologies depuis plusieurs années, j'ai choisi cette formation afin de développer mes compétences dans ce domaine. Au cours de mon parcours, j'ai acquis des connaissances en programmation, notamment en <strong>PHP</strong> et <strong>HTML</strong>, ainsi qu'en gestion de bases de données et en conduite de projets informatiques.</p>
+                         <div class="profile-container">
+                            <img src="img/WhatsApp Image 2026-04-19 at 16.07.16.jpeg" alt="Photo de profil" class="profile-photo pulse-animation" onclick="openLightbox(this)" style="cursor: pointer;" title="Cliquez pour agrandir">
+                         </div>
+                      </div>
+                    </div>
+                    <!-- Image Post-Slide -->
+                    <div style="margin-top: -20px; text-align: center;">
+                        <img src="img/post-slide-4-1.jpg" alt="Post-slide" style="width: 50%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ========== SECTION COMPÉTENCES ========== -->
+        <section id="competences">
+            <div class="section dark">
+                <div class="boxed">
+                    <h2 class="text-center section-title-white">Mes compétences</h2>
+                    <h3 style="text-align: center; color: rgba(255, 255, 255, 0.8); font-size: 0.9em; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">Langages de programmation</h3>
+                    <div class="flex toColumn gap20">
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/images.png" alt="HTML">
+                            </div>
+                            <h3>HTML</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/CSS3_logo_and_wordmark.svg.png" alt="CSS">
+                            </div>
+                            <h3>CSS</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/226777_738cec596d.png" alt="Java">
+                            </div>
+                            <h3>JAVA</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/mysql.png" alt="MySQL">
+                            </div>
+                            <h3>MYSQL</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/images (1).png" alt="PHP">
+                            </div>
+                            <h3>PHP</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Systèmes d'exploitation -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h3 style="text-align: center; color: rgba(255, 255, 255, 0.8); font-size: 0.9em; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">Systèmes d'exploitations utilisés</h3>
+                    <div class="flex toColumn gap20">
+                        <div class="w33 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/Windows_logo_-_2012_(dark_blue).svg.png" alt="Windows">
+                            </div>
+                            <h3>Windows</h3>
+                        </div>
+                        <div class="w33 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/images (2).png" alt="Debian">
+                            </div>
+                            <h3>Debian (Linux)</h3>
+                        </div>
+                        <div class="w33 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/kali-linux.jpg" alt="Kali Linux">
+                            </div>
+                            <h3>Kali Linux</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programmation et développement -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h3 style="text-align: center; color: rgba(255, 255, 255, 0.8); font-size: 0.9em; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">Programmation et développement</h3>
+                    <div class="flex toColumn gap20">
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/Visual_Studio_Code_1.35_icon.svg.png" alt="Visual Studio Code">
+                            </div>
+                            <h3>Visual Studio Code</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/WampServer-logo.png" alt="Wampserver64">
+                            </div>
+                            <h3>Wampserver64</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/images (3).png" alt="WordPress">
+                            </div>
+                            <h3>WordPress</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/2111432.png" alt="GitHub">
+                            </div>
+                            <h3>GitHub</h3>
+                        </div>
+                        <div class="w25 wm100 skill skill-hover">
+                            <div class="skill-icon-wrapper">
+                                <img src="img/GitLab_icon.svg" alt="GitLab">
+                            </div>
+                            <h3>GitLab</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h2 class="text-center section-title-white">Mes Certifications</h2>
+                    <div class="flex toColumn gap20">
+                        <div class="w33 wm100 certification certification-hover">
+                            <div class="certification-badge">
+                                <img src="img/Capture d'écran 2026-03-11 141624.png" alt="Certification PIX">
+                            </div>
+                            <h3>Certification PIX</h3>
+                            <p>Certification des compétences numériques</p>
+                            <a href="certification-pix-20251201.pdf" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; font-size: 0.9em;">Voir le certificat →</a>
+                        </div>
+                        <div class="w33 wm100 certification certification-hover">
+                            <div class="certification-badge">
+                                <img src="img/Capture d'écran 2026-03-11 142003.png" alt="Certification RGPD">
+                            </div>
+                            <h3>Certification L'atelier RGPD</h3>
+                            <p>Formation sur la protection des données personnelles</p>
+                            <a href="Certificat_.pdf" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; font-size: 0.9em;">Voir le certificat →</a>
+                        </div>
+                        <div class="w33 wm100 certification certification-hover">
+                            <div class="certification-badge">
+                                <img src="img/Capture d’écran 2026-03-26 101500.png" alt="Certification SECNUM">
+                            </div>
+                            <h3>Certification SECNUM</h3>
+                            <p>Formation en cybersécurité - MOOC SecNumacadémie</p>
+                            <a href="https://www.secnumacademie.gouv.fr" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: rgba(102, 126, 234, 0.2); color: #fff; text-decoration: none; border-radius: 5px; transition: all 0.3s ease;">Voir le site →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ========== SECTION STAGES ========== -->
+        <section id="stages">
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Mes Stages</h2>
+                    <p class="text-center" style="margin-bottom: 60px; font-size: 1.2em; color: #666;">Découvrez mes expériences professionnelles en BTS SIO</p>
+                </div>
+            </div>
+
+            <div class="section dark-stage">
+                <div class="boxed">
+                    <h2 class="text-center" style="color: #667eea; margin-bottom: 60px;">Stage 1ère Année</h2>
+                    <div class="flex toColumn gap20 mCenter">
+                        <div class="w50 wm100 stage-card">
+                            <div class="stage-header">
+                                <h3>La CAF Martinique</h3>
+                                <p class="stage-period">Période : Janvier - Février 2025</p>
+                            </div>
+                            
+                            <div class="stage-details">
+                                <h4>Contexte</h4>
+                                <p>Durant mon BTS SIO, j'ai effectué un stage au sein de l'entreprise La CAF Martinique. Ce stage m'a permis de découvrir le fonctionnement d'un service informatique et de développer mes compétences en support utilisateur.</p>
+                                
+                                <h4>Tâches Réalisées</h4>
+                                <ul>
+                                    <li>Support utilisateur et assistance technique</li>
+                                    <li>Maintenance des postes de travail</li>
+                                    <li>Installation de logiciels</li>
+                                    <li>Documentation des incidents</li>
+                                    <li>Gestion des tickets d'incident</li>
+                                </ul>
+                                
+                                <h4>Compétences Développées</h4>
+                                <ul>
+                                    <li>Diagnostic de problèmes informatiques</li>
+                                    <li>Communication avec les utilisateurs</li>
+                                    <li>Rigueur et organisation</li>
+                                    <li>Travail en équipe</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="w50 wm100">
+                            <img src="img/image.jpg" alt="CAF Martinique" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center" style="color: #667eea; margin-bottom: 60px;">Stage 2ème Année</h2>
+                    <div class="flex toColumn gap20 mCenter">
+                        <div class="w50 wm100 stage-card stage-card-light">
+                            <div class="stage-header">
+                                <h3>Créacode - PizzaFast API</h3>
+                                <p class="stage-period">Période : 5 janvier 2026 - 6 février 2026</p>
+                            </div>
+                            
+                            <div class="stage-details">
+                                <h4>Contexte</h4>
+                                <p>Dans le cadre de mon stage en BTS SIO 2ème année, j'ai effectué un stage au sein de l'entreprise Créacode, composée d'une personne en freelance Thomas COTRELL, qui était mon tuteur de stage.</p>
+                                
+                                <h4>Objectif</h4>
+                                <p>Développer une application web complète pour l'entreprise PizzaFAST permettant de gérer l'ensemble de son activité (gestion des matières premières, gestion des recettes, commandes clients, interface cuisine, interface caisse, etc.). Cette application devait être accessible depuis un navigateur web et utilisable aussi bien par les clients que par les employés.</p>
+                                
+                                <h4>Démarche Mise en Œuvre</h4>
+                                <ul>
+                                    <li><strong>Organisation :</strong> Création de deux groupes de travail (Frontend et Backend)</li>
+                                    <li><strong>Versionning :</strong> Utilisation de GitHub pour la gestion du code</li>
+                                    <li><strong>Base de données :</strong> Création d'un MCD collaboratif</li>
+                                    <li><strong>Langage & Outils :</strong> Node.js, Express, TypeScript</li>
+                                    <li><strong>Ma responsabilité :</strong> Développement de la classe matière_première (routes et models)</li>
+                                    <li><strong>Tests :</strong> Utilisation de Postman pour tester les requêtes HTTP</li>
+                                    <li><strong>Méthodologie :</strong> Méthode Agile avec tableau (À faire / À tester / Fait)</li>
+                                    <li><strong>Optimisation :</strong> Refactoring du code pour améliorer l'organisation et la lisibilité</li>
+                                    <li><strong>Sécurité :</strong> Mise en place de l'authentification et des autorisations</li>
+                                </ul>
+                                
+                                <h4>Difficultés Rencontrées</h4>
+                                <ul>
+                                    <li>Installation initiale du serveur : fichiers manquants et fichiers incorrects</li>
+                                </ul>
+                                
+                                <h4>Compétences Développées</h4>
+                                <ul>
+                                    <li>Développement backend avec Node.js et Express</li>
+                                    <li>Programmation en TypeScript</li>
+                                    <li>Conception de base de données (MCD)</li>
+                                    <li>Travail en équipe et collaboration Git</li>
+                                    <li>Méthodologie Agile</li>
+                                    <li>Tests d'API avec Postman</li>
+                                    <li>Sécurisation d'une application web</li>
+                                    <li>Refactoring et optimisation de code</li>
+                                </ul>
+                                
+                                <h4>Conclusion</h4>
+                                <p>Ce stage m'a permis de consolider mes compétences en développement backend et de découvrir les bonnes pratiques en matière de travail collaboratif à travers Git et la méthodologie Agile. J'ai pu appliquer les connaissances acquises en cours dans un contexte professionnel réel et développer mon ouverture d'esprit concernant l'architecture logicielle.</p>
+                            </div>
+                        </div>
+                        <div class="w50 wm100">
+                            <img src="img/WhatsApp Image 2026-04-19 at 17.24.57.jpeg" alt="Stage 2ème année" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ========== SECTION PPE ========== -->
+        <section id="ppe">
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Projets Personnels Encadrés (PPE)</h2>
+                    <p class="text-center" style="margin-top: 20px; font-size: 1.1em; color: #666;">Section en cours de développement - Mes projets seront bientôt disponibles ici</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Tableau de Synthèse</h2>
+                    <div class="synthesis-container">
+                        <a href="a copier BTS SIO 2026 - Tableau de synthèse - Epreuve E4.xlsx" target="_blank" class="excel-preview">
+                            <div class="excel-icon">
+                                <span class="material-icons">description</span>
+                            </div>
+                            <h3>Tableau de Synthèse</h3>
+                            <p>Cliquez pour télécharger mon tableau de synthèse</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ========== SECTION VEILLE TECHNOLOGIQUE ========== -->
+        <section id="veille">
+            <!-- Introduction -->
+            <div class="section">
+                <div class="boxed">
+                    <div class="veille-intro">
+                        <h2 class="text-center section-title">Veille Technologique</h2>
+                        <p class="text-center" style="margin: 20px 0 40px; font-size: 1.2em; color: #666;">L'IA au service du développement informatique</p>
+                        <div class="intro-box">
+                            <h3>Comment l'intelligence artificielle aide-t-elle les développeurs et transforme-t-elle le développement informatique ?</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objectifs -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h2 class="text-center section-title-white">Objectifs</h2>
+                    <div class="flex toColumn gap20">
+                        <div class="w33 wm100 objectif-card">
+                            <div class="objectif-icon">1</div>
+                            <h3>Comprendre les outils d'IA</h3>
+                            <p>Identifier et analyser les principaux outils d'IA utilisés par les développeurs</p>
+                        </div>
+                        <div class="w33 wm100 objectif-card">
+                            <div class="objectif-icon">2</div>
+                            <h3>Identifier les avantages et limites</h3>
+                            <p>Évaluer les bénéfices et les contraintes de l'utilisation de l'IA en développement</p>
+                        </div>
+                        <div class="w33 wm100 objectif-card">
+                            <div class="objectif-icon">3</div>
+                            <h3>Suivre les évolutions</h3>
+                            <p>Analyser les tendances récentes et futures dans le domaine</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problématique -->
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Problématique</h2>
+                    <div class="problematique-box">
+                        <p>Cette veille vise à analyser comment l'intelligence artificielle est utilisée dans le développement informatique, en identifiant les outils existants, leurs avantages et limites, et les tendances futures.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sources -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h2 class="text-center section-title-white">Sources d'Information</h2>
+                    <div class="flex toColumn gap20">
+                        <div class="sources-group">
+                            <h3>📰 Sites Spécialisés</h3>
+                            <ul class="sources-list">
+                                <li><a href="#" target="_blank">Developpez.com – section IA et programmation</a></li>
+                                <li><a href="#" target="_blank">Numerama – actualités tech</a></li>
+                                <li><a href="#" target="_blank">ZDNet – nouvelles technologies et développement</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sources-group">
+                            <h3>🤖 Sites des Éditeurs d'IA</h3>
+                            <ul class="sources-list">
+                                <li><a href="https://openai.com" target="_blank">OpenAI</a></li>
+                                <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sources-group">
+                            <h3>💬 Forums et Blogs</h3>
+                            <ul class="sources-list">
+                                <li><a href="https://stackoverflow.com" target="_blank">Stack Overflow</a></li>
+                                <li><a href="https://medium.com" target="_blank">Medium – section "Artificial Intelligence"</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sources-group">
+                            <h3>🔔 Outils d'Automatisation</h3>
+                            <ul class="sources-list">
+                                <li><a href="#" target="_blank">Google Alerts</a></li>
+                                <li><a href="#" target="_blank">Feedly</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Éléments de Veille -->
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Éléments de Veille</h2>
+                    <div class="veille-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3>GitHub Copilot</h3>
+                                <p class="timeline-date">2021 - Aujourd'hui</p>
+                                <p>Assistant IA codé en temps réel basé sur GPT-3, transformant la façon d'écrire du code.</p>
+                                <span class="tag">Code Completion</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3>ChatGPT pour les Développeurs</h3>
+                                <p class="timeline-date">2022 - Aujourd'hui</p>
+                                <p>Outil polyvalent pour expliquer du code, générer des fonctions et déboguer.</p>
+                                <span class="tag">Assistance Générale</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Tabnine</h3>
+                                <p class="timeline-date">2019 - Aujourd'hui</p>
+                                <p>Auto-complétion basée sur l'IA pour plusieurs langages de programmation.</p>
+                                <span class="tag">Auto-complétion</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3>Débogage Automatisé</h3>
+                                <p class="timeline-date">2023 - Aujourd'hui</p>
+                                <p>Outils IA pour identifier et corriger automatiquement les bugs dans le code.</p>
+                                <span class="tag">Débogage</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avantages et Limites -->
+            <div class="section dark">
+                <div class="boxed">
+                    <h2 class="text-center section-title-white">Avantages et Limites</h2>
+                    <div class="flex toColumn gap20">
+                        <div class="w50 wm100 advantage-box">
+                            <h3>✅ Avantages</h3>
+                            <ul>
+                                <li>Augmente la productivité des développeurs</li>
+                                <li>Réduit les erreurs et les bugs</li>
+                                <li>Facilite l'apprentissage de nouveaux langages</li>
+                                <li>Accélère le processus de développement</li>
+                                <li>Génère de la documentation automatiquement</li>
+                            </ul>
+                        </div>
+
+                        <div class="w50 wm100 limitation-box">
+                            <h3>⚠️ Limites</h3>
+                            <ul>
+                                <li>Génère parfois du code inadapté ou inefficace</li>
+                                <li>Problèmes de propriété intellectuelle et de droits d'auteur</li>
+                                <li>Dépendance excessive vis-à-vis de l'IA</li>
+                                <li>Nécessite une vérification humaine constante</li>
+                                <li>Coûts d'accès aux services IA premium</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Synthèse -->
+            <div class="section">
+                <div class="boxed">
+                    <h2 class="text-center section-title">Synthèse</h2>
+                    <div class="synthese-box">
+                        <h3>Conclusions Principales</h3>
+                        <p>L'intelligence artificielle révolutionne le développement informatique en offrant des outils puissants qui augmentent la productivité et facilitent la résolution de problèmes complexes. Cependant, elle ne remplace pas le développeur mais plutôt le complète.</p>
+                        
+                        <h3>Tendances Futures</h3>
+                        <p>Les tendances indiquent une intégration croissante de l'IA dans les IDE, une amélioration continue de la qualité du code généré, et une augmentation de l'automatisation des tâches répétitives. Les développeurs doivent rester vigilants quant à la sécurité et l'éthique de l'utilisation de l'IA.</p>
+                        
+                        <h3>Recommandations</h3>
+                        <p>Il est essentiel que les développeurs comprennent les capacités et les limites des outils IA, les utilisent de manière responsable, et continuent à développer leurs compétences fondamentales en programmation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer>
+            <div class="boxed">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>À Propos</h3>
+                        <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.8;">
+                            Étudiant en BTS SIO option SLAM, passionné par le développement web et les nouvelles technologies.
+                        </p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" title="LinkedIn">
+                                <span style="font-weight: bold;">in</span>
+                            </a>
+                            <a href="#" class="social-icon" title="GitHub">
+                                <span style="font-weight: bold;">GH</span>
+                            </a>
+                            <a href="#" class="social-icon" title="Email">
+                                <span style="font-weight: bold;">@</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul class="footer-links">
+                            <li><a href="#accueil">→ Accueil</a></li>
+                            <li><a href="#about">→ À propos</a></li>
+                            <li><a href="#competences">→ Compétences</a></li>
+                            <li><a href="#stages">→ Stages</a></li>
+                            <li><a href="#ppe">→ PPE</a></li>
+                            <li><a href="#veille">→ Veille Technologique</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 RANO Ethan - Portfolio BTS SIO SLAM. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Navigation indicator active state
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-section') === current) {
+                    dot.classList.add('active');
+                }
+            });
+
+            // Back to top button visibility
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Click on nav dots
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.getAttribute('data-section');
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Back to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lightbox functions
+        function openLightbox(img) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Empêche le scroll du body
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Réactive le scroll
+        }
+
+        // Fermer le lightbox avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</html>
